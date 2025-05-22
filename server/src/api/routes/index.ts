@@ -5,6 +5,10 @@ import adminCandidatesRouter from './admin/candidates';
 import adminStatsRouter from './admin/stats';
 import adminConfigRouter from './admin/config';
 import voterElectionsRouter from './voter/elections';
+import authRouter from './auth';
+import electionsRouter from './elections';
+import candidatesRouter from './candidates';
+import votesRouter from './votes';
 
 // Initialize the main router
 const router = Router();
@@ -22,7 +26,17 @@ router.use(`/${API_VERSION}/admin/config`, adminConfigRouter);
 // Voter routes
 router.use(`/${API_VERSION}/voter/elections`, voterElectionsRouter);
 
-// Auth routes will be added here
+// Auth routes
+router.use(`/${API_VERSION}/auth`, authRouter);
+
+// Election routes
+router.use(`/${API_VERSION}/elections`, electionsRouter);
+
+// Candidate routes
+router.use(`/${API_VERSION}/candidates`, candidatesRouter);
+
+// Vote routes
+router.use(`/${API_VERSION}/votes`, votesRouter);
 
 // Public API routes
 router.get(`/${API_VERSION}/healthcheck`, (req, res) => {

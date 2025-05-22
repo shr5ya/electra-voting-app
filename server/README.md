@@ -112,6 +112,15 @@ The server includes a comprehensive notification system:
 - Scheduled notifications and reminders
 - Customizable notification templates
 
+## Environment Variables
+
+- `MONGODB_URI`: MongoDB connection string
+- `JWT_SECRET`: Secret key for JWT authentication
+
+## API Documentation
+
+Swagger UI is available at `/api-docs` after starting the server.
+
 ## License
 
 MIT 

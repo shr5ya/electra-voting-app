@@ -7,6 +7,8 @@ import dotenv from 'dotenv';
 import { createServer } from 'http';
 import apiRoutes from './api/routes';
 import notificationService from './services/notification';
+import { connectDB } from './db';
+import { setupSwagger } from './swagger';
 
 // Load environment variables
 dotenv.config();
@@ -58,6 +60,12 @@ if (process.env.NODE_ENV === 'production') {
 // API routes
 app.use('/api', apiRoutes);
 
+// Register Swagger UI
+setupSwagger(app);
+
+// Connect to MongoDB
+connectDB();
+
 // Create HTTP server
 const server = createServer(app);
 
@@ -83,6 +91,12 @@ process.on('uncaughtException', (err: Error) => {
     console.log('Shutting down due to uncaught exception');
     process.exit(1);
   }
+});
+
+// Centralized error handler
+app.use((err, req, res, next) => {
+  console.error(err);
+  res.status(500).json({ message: 'Internal server error', error: err.message });
 });
 
 export default server; 
